@@ -1,0 +1,96 @@
+.hero {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: clamp(64px, 10vw, 120px) 24px clamp(64px, 9vw, 108px);
+  border-bottom: 1px solid rgba(27, 26, 23, 0.22);
+  background: radial-gradient(900px 340px at 50% 0%, rgba(212, 175, 55, 0.16), transparent 70%);
+}
+
+.hero-title {
+  display: block;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(2.2rem, 6vw, 4.6rem);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+
+.hero-sub {
+  margin-top: 20px;
+  font-size: clamp(1rem, 1.7vw, 1.25rem);
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+/* ---------- Shop Now button: glows on hover / focus / press ---------- */
+.shop-now {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding: 18px 42px;
+  border: 1.5px solid var(--ink);
+  border-radius: 10px;
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  transition: color 0.3s, background 0.3s, border-color 0.3s, box-shadow 0.3s, transform 0.15s;
+}
+
+/* shine sweep */
+.shop-now::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(212, 175, 55, 0.4) 50%, transparent 70%);
+  transform: translateX(-120%);
+  transition: transform 0.8s var(--ease);
+  pointer-events: none;
+}
+
+.shop-now-arrow {
+  display: inline-block;
+  font-size: 1.3rem;
+  line-height: 1;
+  transition: transform 0.3s var(--ease);
+}
+
+.shop-now:hover,
+.shop-now:focus-visible {
+  background: var(--ink);
+  color: var(--gold);
+  border-color: var(--gold);
+  box-shadow: 0 0 0 1px var(--gold), 0 0 22px var(--gold-glow), 0 0 52px rgba(212, 175, 55, 0.4);
+}
+
+.shop-now:hover::before,
+.shop-now:focus-visible::before {
+  transform: translateX(120%);
+}
+
+.shop-now:hover .shop-now-arrow,
+.shop-now:focus-visible .shop-now-arrow {
+  transform: translateX(7px);
+}
+
+.shop-now:active {
+  transform: scale(0.97);
+  box-shadow: 0 0 0 1px var(--gold), 0 0 32px var(--gold-glow), 0 0 70px rgba(212, 175, 55, 0.6);
+}
+
+@media (max-width: 480px) {
+  .shop-now {
+    padding: 16px 32px;
+    margin-top: 36px;
+  }
+}

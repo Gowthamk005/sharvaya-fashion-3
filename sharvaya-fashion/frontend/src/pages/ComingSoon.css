@@ -1,0 +1,14 @@
+.coming-soon {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  min-height: 60vh;
+  align-content: center;
+  padding: 80px 24px;
+  text-align: center;
+}
+
+.coming-soon-note {
+  margin-bottom: 14px;
+  color: var(--muted);
+}

@@ -1,0 +1,206 @@
+/* ============ Design tokens ============ */
+:root {
+  --bg: #f3efe8;
+  --bg-soft: #faf7f2;
+  --paper: #ffffff;
+  --ink: #1b1a17;
+  --muted: #6d675c;
+  --line: #ddd5c7;
+  --gold: #d4af37;
+  --gold-deep: #9c7410;
+  --gold-glow: rgba(212, 175, 55, 0.8);
+  --dark: #14120f;
+  --font-display: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --font-ui: 'Jost', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --radius: 14px;
+  --ease: cubic-bezier(0.22, 0.8, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+p,
+blockquote {
+  margin: 0;
+}
+
+section[id] {
+  scroll-margin-top: 84px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+
+/* ============ Shared layout helpers ============ */
+.section-inner {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+@media (max-width: 640px) {
+  .section-inner {
+    padding: 0 20px;
+  }
+}
+
+.eyebrow {
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--gold-deep);
+}
+
+.section-title {
+  margin-top: 10px;
+  font-weight: 300;
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  line-height: 1.12;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ============ Glow link: underline grows from the centre + golden glow ============ */
+.glow-link {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.25s, text-shadow 0.25s, transform 0.15s;
+}
+
+.glow-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -3px;
+  height: 2px;
+  background: var(--gold);
+  box-shadow: 0 0 10px var(--gold-glow);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s var(--ease);
+}
+
+.glow-link:hover,
+.glow-link:focus-visible {
+  color: var(--gold-deep);
+  text-shadow: 0 0 10px var(--gold-glow), 0 0 24px rgba(212, 175, 55, 0.45);
+}
+
+.glow-link:hover::after,
+.glow-link:focus-visible::after,
+.glow-link.active::after {
+  transform: scaleX(1);
+}
+
+.glow-link:active {
+  transform: scale(0.96);
+  text-shadow: 0 0 14px var(--gold-glow), 0 0 34px var(--gold-glow);
+}
+
+/* ============ Glow text: normal, then golden glow on hover / click / touch ============ */
+.glow-text {
+  cursor: default;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: color 0.4s ease, text-shadow 0.4s ease;
+}
+
+.glow-text:hover,
+.glow-text:focus,
+.glow-text:active {
+  color: var(--gold);
+  text-shadow: 0 0 6px rgba(212, 175, 55, 0.95), 0 0 20px rgba(212, 175, 55, 0.75),
+    0 0 42px rgba(212, 175, 55, 0.5);
+}
+
+/* ============ Toast ============ */
+.toaster {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  transform: translateX(-50%);
+  z-index: 200;
+  pointer-events: none;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+}
+
+.toast {
+  background: var(--dark);
+  color: var(--gold);
+  padding: 12px 22px;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25), 0 0 18px rgba(212, 175, 55, 0.35);
+  animation: toast-in 0.35s var(--ease);
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

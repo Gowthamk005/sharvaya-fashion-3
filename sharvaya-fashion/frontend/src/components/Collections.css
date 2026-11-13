@@ -1,0 +1,124 @@
+.collections {
+  padding: clamp(56px, 8vw, 96px) 0 clamp(48px, 6vw, 72px);
+  border-bottom: 1px solid rgba(27, 26, 23, 0.22);
+}
+
+.collections-head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 44px;
+}
+
+.view-all {
+  flex-shrink: 0;
+  margin-bottom: 8px;
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+}
+
+.view-all::after {
+  transform: scaleX(1); /* always underlined, like the wireframe; the glow comes on hover */
+  opacity: 0.55;
+  transition: transform 0.3s var(--ease), opacity 0.3s;
+}
+
+.view-all:hover::after,
+.view-all:focus-visible::after {
+  opacity: 1;
+}
+
+/* ---------- Carousel ---------- */
+.carousel-viewport {
+  overflow: hidden;
+  /* breathing room so hover lift + shadows are not clipped */
+  padding: 12px 6px 8px;
+  margin: -12px -6px -8px;
+  touch-action: pan-y;
+}
+
+.carousel-track {
+  --gap: 22px;
+  display: flex;
+  gap: var(--gap);
+  /* move by one card (card width + gap) per step */
+  transform: translateX(
+    calc(var(--index) * -1 * ((100% - (var(--visible) - 1) * var(--gap)) / var(--visible) + var(--gap)))
+  );
+  transition: transform 0.55s var(--ease);
+  will-change: transform;
+}
+
+.carousel-item {
+  flex: 0 0 calc((100% - (var(--visible) - 1) * var(--gap)) / var(--visible));
+  min-width: 0;
+}
+
+/* ---------- Arrows ---------- */
+.carousel-controls {
+  display: flex;
+  gap: 12px;
+  margin-top: 34px;
+}
+
+.arrow-btn {
+  display: grid;
+  place-items: center;
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s var(--ease), background 0.25s, color 0.25s, box-shadow 0.25s;
+}
+
+.arrow-btn:hover,
+.arrow-btn:focus-visible {
+  background: var(--ink);
+  color: var(--gold);
+  box-shadow: 0 0 20px var(--gold-glow);
+}
+
+.arrow-btn:active {
+  transform: scale(0.92);
+}
+
+/* hidden but still holding its place so the other arrow never jumps */
+.arrow-btn.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: scale(0.8);
+}
+
+/* ---------- Empty state ---------- */
+.collections-empty {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  padding: 64px 20px;
+  border: 1.5px dashed var(--line);
+  border-radius: var(--radius);
+  color: var(--muted);
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .collections-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .view-all {
+    margin-bottom: 0;
+  }
+  .carousel-track {
+    --gap: 16px;
+  }
+}

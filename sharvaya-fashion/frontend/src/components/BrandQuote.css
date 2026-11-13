@@ -1,0 +1,34 @@
+/* Dark band so the golden glow really stands out. Change --quote-bg to restyle it. */
+.brand-quote {
+  --quote-bg: radial-gradient(1100px 420px at 50% 0%, #2a241b 0%, #14120f 70%);
+  padding: clamp(64px, 9vw, 112px) 24px;
+  background: var(--quote-bg);
+  text-align: center;
+}
+
+.quote-inner {
+  max-width: 1040px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+}
+
+.quote-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.7vw, 3rem);
+  line-height: 1.4;
+  letter-spacing: 0.01em;
+  color: #efe7d6;
+  padding: 6px 10px;
+  text-wrap: balance;
+}
+
+.quote-ornament {
+  width: 90px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--gold), transparent);
+}
